@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">deezerApp</string>
+    <string name="musique">Musique</string>
+    <string name="artiste">Artiste</string>
+    <string name="album">Album</string>
+    <string name="np">Now Playing</string>
+    <string name="titre">Titre</string>
+    <string name="ecouter">Ecouter</string>
+    <string name="link">Voir sur Deezer</string>
+</resources>
