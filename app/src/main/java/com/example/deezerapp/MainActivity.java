@@ -40,10 +40,15 @@ public class MainActivity extends AppCompatActivity implements IOnSelectedMusiqu
     @Override
     public void onSelectedMusique(Musique musique) {
         musiqueFragment.setMusique(musique);
-        getSupportFragmentManager().beginTransaction()
-                .hide(searchFragment)
-                .show(musiqueFragment)
-                .commit();
+        if(isMobile()){
+            getSupportFragmentManager().beginTransaction()
+                    .hide(searchFragment)
+                    .show(musiqueFragment)
+                    .commit();
+        }else {
+
+        }
+
     }
 
     @Override
