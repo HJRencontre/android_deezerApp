@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <ImageView
         android:id="@+id/imageViewCover"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:layout_margin="10sp"
+        android:clickable="false"
         tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     <LinearLayout
@@ -21,6 +23,7 @@
         android:layout_marginStart="20sp"
         android:layout_marginEnd="20sp"
         android:layout_gravity="center"
+        android:clickable="true"
         android:orientation="vertical">
 
         <TextView
@@ -28,27 +31,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:clickable="true"
             android:text="@string/musique" />
 
         <TextView
             android:id="@+id/textViewAlbum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/album" />
+            android:text="@string/album"
+            android:clickable="true" />
 
         <TextView
             android:id="@+id/textViewArtiste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/artiste" />
+            android:text="@string/artiste"
+            android:clickable="true" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButtonLike"
+    <ImageView
+        android:id="@+id/ImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/btn_star"
         android:layout_gravity="center"/>
-
 
 </LinearLayout>

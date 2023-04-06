@@ -109,7 +109,7 @@
         app:cardElevation="2dp"
         >
         <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewCover"
         android:layout_width="250sp"
         android:layout_height="250sp"
         tools:srcCompat="@tools:sample/avatars" />
