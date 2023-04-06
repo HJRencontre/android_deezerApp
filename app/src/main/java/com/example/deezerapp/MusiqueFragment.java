@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 
-public class MusiqueActivity extends AppCompatActivity implements View.OnClickListener {
+public class MusiqueFragment extends Fragment implements View.OnClickListener {
 
     private TextView textViewMusic, textViewArtiste, textViewAlbum;
     private ImageView imageViewCover;
@@ -22,34 +25,36 @@ public class MusiqueActivity extends AppCompatActivity implements View.OnClickLi
 
     private Musique musique;
 
+    public void setMusique(Musique musique) {
+        this.musique = musique;
+        refresh();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_musique);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_musique, null);
 
-        textViewMusic = findViewById(R.id.textViewMusic);
-        textViewArtiste = findViewById(R.id.textViewArtiste);
-        textViewAlbum = findViewById(R.id.textViewAlbum);
+        textViewMusic = v.findViewById(R.id.textViewMusic);
+        textViewArtiste = v.findViewById(R.id.textViewArtiste);
+        textViewAlbum = v.findViewById(R.id.textViewAlbum);
 
-        imageViewCover = findViewById(R.id.imageViewCover);
+        imageViewCover = v.findViewById(R.id.imageViewCover);
 
-        buttonPlay = findViewById(R.id.buttonEcouter);
-        buttonLink = findViewById(R.id.buttonLinkDeezer);
+        buttonPlay = v.findViewById(R.id.buttonEcouter);
+        buttonLink = v.findViewById(R.id.buttonLinkDeezer);
 
         buttonPlay.setOnClickListener(this);
         buttonLink.setOnClickListener(this);
 
+        return v;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        musique = (Musique) getIntent().getSerializableExtra("selectedMusique");
+    public void refresh() {
         textViewMusic.setText(musique.getTitre());
         textViewArtiste.setText(musique.getArtiste());
         textViewAlbum.setText(musique.getAlbum());
 
-        ServicesAPI.loadImage(this,musique.getCover(), imageViewCover);
+        ServicesAPI.loadImage(getContext(),musique.getCover(), imageViewCover);
 
     }
 
@@ -62,7 +67,7 @@ public class MusiqueActivity extends AppCompatActivity implements View.OnClickLi
             buttonPlay.setText("STOP");
             try {
                 player.reset();
-                player.setDataSource(this, Uri.parse(musique.getPreviewLink()));
+                player.setDataSource(getContext(), Uri.parse(musique.getPreviewLink()));
                 player.prepare();
                 player.start();
             } catch (IOException e) {
@@ -74,12 +79,5 @@ public class MusiqueActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(player.isPlaying()){
-            player.stop();
-        }
-    }
 }
 
